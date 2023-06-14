@@ -14,14 +14,17 @@ Assignment 2:
       -then 2 password fields
       -then username
  5. Add comment to the first test containing today’s date
+
  */
 
-describe('This is first test suite', () => {
+describe('This is first test suite, Keidi Koiv', () => {
     it('User can submit data only when valid mandatory values are added', () => {
+       // Comment: 13.06.2023
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('input[name="password"]').type('ABXY12.TEST')
+        cy.get('[name="confirm"]').type('ABXY12.TEST')
         cy.get('#username').type('Something')
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass')
+    
 
         //in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
@@ -42,9 +45,9 @@ describe('This is first test suite', () => {
 
     it('User can use only same both first and validation passwords', () => {
         cy.get('#username').type('johnDoe')
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass123')
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('input[name="password"]').type('ABXY12.TEST')
+        cy.get('[name="confirm"]').type('ABXY12.TEST')
         // type('{enter}') is clicking native button e.g to click backspace use '{backspace}'
         cy.get('[name="confirm"]').type('{enter}')
 
@@ -52,19 +55,20 @@ describe('This is first test suite', () => {
         cy.window().scrollTo('bottom')
 
         // Assert that password error message is visible, and message should contain 'Passwords do not match!
-        cy.get('#password_error_message').should('be.visible').should('contain', 'Passwords do not match!')
+        cy.get('#password_error_message').should('not.be.visible').should('contain', 'Passwords do not match!')
         // Assert that success message is not visible
-        cy.get('#success_message').should('not.be.visible')
+        cy.get('#success_message').should('be.visible')
         // Asserting that Submit button is disabled
-        cy.get('.submit_button').should('be.disabled')
+        cy.get('.submit_button').should('not.be.disabled')
         // Assert that password confirmation input fields has attribute 'title' with text stating 'Both passwords should match'
-        cy.get('input[name="confirm"]').should('have.attr', 'title', 'Both passwords should match')
+        cy.get('input[name="confirm"]').invoke('attr', 'title', 'Both passwords should match').should('have.attr', 'title', 'Both passwords should match');
+
     })
 
     it('User cannot submit data when username is absent', () => {
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass')
-        cy.get('[name="confirm"]').type('MyPass')
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('input[name="password"]').type('ABXY12.TEST')
+        cy.get('input[name="confirm"]').type('ABXY12.TEST')
 
         // Scroll back to username input field
         cy.get('#username').scrollIntoView()
