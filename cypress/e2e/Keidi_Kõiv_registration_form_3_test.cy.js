@@ -14,16 +14,16 @@ Task list:
     * email format
  */
 
-
+describe('Section 1: visual tests', ()=> {
     it('This is a test to check content and link of checkboxes', () => {
     cy.get('[type="checkbox"]').should('have.class', 'ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required', 'Accept our privacy policy' )
     //Making sure there is a link in second checkbox
     cy.get('[type="checkbox"]').last().parent().find('a[href="cookiePolicy.html"]').should('exist');
 
     });
+})
 
-
-
+describe ('This is my test', ()=> {
     it('This is a test to check dropdowns', () => { 
     cy.get('#country').children().should('have.length', 4)
     cy.get('#country').find('option').eq(0).should('not.have.text')
@@ -42,8 +42,10 @@ Task list:
 
 
     });
+})
 
 
+describe ('This is my test', ()=> {
 it('This is a test to check email format', () => { 
     cy.get('[name="email"]').should('have.attr', 'type', 'email')
     cy.get('[name="email"]').type('koivkeidi')
@@ -59,8 +61,9 @@ it('This is a test to check email format', () => {
 
 
 });
+})
 
-
+describe ('This is my test', ()=> {
     it('This is a test to check that the user can only click on one radio button', () => { 
         cy.get('input[type="radio"]').should('have.length', 4)
         cy.get('input[type="radio"]').next().eq(0).should('have.text','Daily').and('not.be.checked')
@@ -76,7 +79,7 @@ it('This is a test to check email format', () => {
 
 
     });
-
+})
 
 
 
@@ -95,7 +98,7 @@ Task list:
     * add file (google yourself for solution)
  */
 
-
+describe ('This is my test', ()=> {
     it('This is a test to submit the form if only mandatory fields are present', () => { 
     cy.get('[name="email"]').type('koivkeidi@gmail.com')
     cy.get('#country').select('Spain')
@@ -112,9 +115,10 @@ Task list:
 
 
     });
+})
 
-
-it('This is a test to not submit the form if some mandatory fields are absent', () => { 
+describe ('This is my test', ()=> {
+it('This is a test to not submit the form if mandatory fields are absent', () => { 
 //Not filling in the birthday field and not accepting privacy policy and cookies
 cy.get('#name').clear().type('Keidi')
 cy.get('[name="email"]').type('koivkeidi@gmail.com')
@@ -130,9 +134,9 @@ cy.get('[type="submit"]').last().should('be.disabled')
 
 
     });
+})
 
-
-
+describe ('This is my test', ()=> {
     it('This is a test to submit a form with All fields', () => { 
 cy.get('#name').clear().type('Keidi')
 cy.get('[name="email"]').type('koivkeidi@gmail.com')
@@ -149,10 +153,10 @@ cy.contains('Submission received').should('be.visible')
 
 
 });
+})
 
 
-
-
+describe ('This is my test', ()=> {
     it('This is a test to check that when the user changes the country, the selected city disappears', () => { 
         //Selecting country and the city
         cy.get('#country').select('Spain')
@@ -164,11 +168,11 @@ cy.contains('Submission received').should('be.visible')
 
     })
 
-
+})
 
 
 it('This is a test to upload a file', () => { 
-    //Fisrtly, moving the file into fixtures, Found a code in docs.cypress.io 
+    //Firstly, moving the file into fixtures, Found a code in docs.cypress.io 
     cy.get('#myFile').selectFile('cypress/fixtures/load_this_file_reg_form_3.txt')
         });
     
